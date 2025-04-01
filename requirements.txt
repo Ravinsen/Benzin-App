@@ -1,0 +1,8 @@
+requests
+beautifulsoup4
+pymongo
+python-dotenv
+flask
+pandas
+geopy
+scikit-learn
