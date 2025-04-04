@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     gcc \
     locales \
+    locales-all \
     libffi-dev \
     libpq-dev \
     libssl-dev \
@@ -19,7 +20,7 @@ RUN apt-get update && apt-get install -y \
     locale-gen de_DE.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
 
-# 🌍 Manuell Umgebungsvariablen setzen (statt update-locale)
+# 🌍 Umgebungsvariablen setzen
 ENV LANG=de_DE.UTF-8
 ENV LANGUAGE=de_DE:de
 ENV LC_ALL=de_DE.UTF-8

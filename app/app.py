@@ -201,7 +201,7 @@ def index():
             if best_today and recommendation:
                 if best_today[kraftstoff] < recommendation["price"]:
                     recommendation = {
-            "date": today.strftime("%Y-%m-%d"),
+            "date": format_date_de(today),
             "price": best_today[kraftstoff],
             "brand": best_today.get("brand", ""),
             "name": best_today.get("name", ""),
