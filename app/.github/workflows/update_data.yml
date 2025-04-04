@@ -25,6 +25,7 @@ jobs:
 
       - name: 🔐 Umgebungsvariablen setzen
         run: echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> $GITHUB_ENV
+            echo "TANKERKOENIG_API_KEY=${{ secrets.TANKERKOENIG_API_KEY }}" >> $GITHUB_ENV
 
       - name: 🚀 Starte den Import
         run: python data/main.py
