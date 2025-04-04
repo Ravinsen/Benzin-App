@@ -1,16 +1,16 @@
-name: 🛢️ Täglicher Datenimport nach MongoDB
+name: 📅 Täglicher Datenimport nach MongoDB
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 4 * * *' # Täglich um 4:00 UTC
-  workflow_dispatch: # Manuell auslösbar
+    - cron: '0 6 * * *'  # Jeden Tag um 6 Uhr morgens UTC
 
 jobs:
   run-daily-script:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # 🛠 Fix für Python auf Ubuntu
 
     steps:
-      - name: 📥 Repository klonen
+      - name: 📥 Code aus dem Repository holen
         uses: actions/checkout@v3
 
       - name: 🐍 Python installieren
@@ -23,10 +23,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 🔐 Umgebungsvariablen setzen
-        run: |
-          echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> $GITHUB_ENV
-          echo "TANKERKOENIG_API_KEY=${{ secrets.TANKERKOENIG_API_KEY }}" >> $GITHUB_ENV
-
-      - name: 🚀 Starte den Import
+      - name: 🧠 Main-Skript ausführen
         run: python data/main.py
