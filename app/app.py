@@ -212,7 +212,7 @@ def index():
             <div class='box'>
                 <div class='section-title'>💡 Empfehlung - Bester Tag zum Tanken:</div>
                 <div class='forecast-table'>
-                    <span>{format_date_de(datetime.strptime(recommendation["date"], "%Y-%m-%d"))}</span>
+                    <span>{recommendation["date"]}</span>
                     <span>{recommendation["price"]:.2f} €/L</span>
                     <span>→</span>
                     <span>{recommendation["brand"]} – {recommendation["name"]}</span>
