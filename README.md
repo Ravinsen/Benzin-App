@@ -38,7 +38,7 @@ Die Daten stammen von der Tankerkönig API, welche Preisinformationen lizenziert
 ## Performanceoptimierung
 
 - Koordinaten-Caching: Die Koordinaten der 20 Städte werden beim ersten Zugriff in einer coords_cache.json Datei gespeichert. So entfällt der wiederholte API-Aufruf bei weiteren Abfragen.  
-- Datenbank-Indizes: Um die Lesegeschwindigkeit zu erhöhen, wurden Indizes auf den Feldern ort, timestamp und den drei Kraftstoffarten gesetzt.  
+- MongoDB-Indexes: Um die Lesegeschwindigkeit zu erhöhen, wurden Indexes auf den Feldern ort, timestamp und den drei Kraftstoffarten gesetzt.  
 - Datenfilterung: Für die Vorhersage werden ausschließlich die letzten 60 Tage historischer Daten berücksichtigt.  
 
 ## Projektkontext
