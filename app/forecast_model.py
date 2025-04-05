@@ -1,5 +1,3 @@
-# model/forecast_model.py (jetzt unter app/forecast_model.py)
-
 import os
 import json
 from dotenv import load_dotenv
@@ -12,22 +10,22 @@ from sklearn.linear_model import LinearRegression
 import numpy as np
 import locale
 
-# 🌍 Datum auf Deutsch anzeigen (soweit möglich)
+# Datum auf Deutsch anzeigen
 try:
     locale.setlocale(locale.LC_TIME, "de_DE.UTF-8")
 except locale.Error:
     try:
         locale.setlocale(locale.LC_TIME, "de_DE")
     except locale.Error:
-        print("⚠️ Deutsche Locale konnte nicht gesetzt werden – benutze Default-Format.")
+        print("Deutsche Locale konnte nicht gesetzt werden – benutze Default-Format.")
 
-# 🔐 MongoDB-Verbindung
+# MongoDB-Verbindung
 load_dotenv()
 client = MongoClient(os.getenv("MONGODB_URI"), tls=True, tlsAllowInvalidCertificates=True)
 db = client["benzinprojekt"]
 collection = db["tankstellen"]
 
-# 📦 Caching-Datei für Ortskoordinaten
+# Caching-Datei für Ortskoordinaten
 COORDS_FILE = "data/coords_cache.json"
 
 def get_coordinates_cached(ort):
@@ -55,8 +53,7 @@ def get_coordinates_cached(ort):
 
     return coords[ort]
 
-# 📥 Preise für Ort und Radius abrufen
-# 📥 Preise für Ort und Radius abrufen
+# Preise für Ort und Radius abrufen
 def get_station_prices(ort, kraftstoff="e5", radius_km=5):
     coords = get_coordinates_cached(ort)
     if not coords:
@@ -64,7 +61,7 @@ def get_station_prices(ort, kraftstoff="e5", radius_km=5):
 
     center = (coords["lat"], coords["lon"])
 
-    # ⏱ Nur Daten der letzten 60 Tage laden
+    # Nur Daten der letzten 60 Tage laden
     start_date = datetime.utcnow() - timedelta(days=60)
 
     query = {
@@ -96,7 +93,7 @@ def get_station_prices(ort, kraftstoff="e5", radius_km=5):
     return df if not df.empty else pd.DataFrame()
 
 
-# 🔮 Preisvorhersage für 5 Tage + Empfehlung (inkl. heute)
+# Preisvorhersage für 5 Tage + Empfehlung (inkl. heute)
 def predict_prices(df, kraftstoff="e5"):
     if df.empty or len(df["date"].unique()) < 2:
         return [], {}
@@ -140,7 +137,7 @@ def predict_prices(df, kraftstoff="e5"):
     df_forecast = df_forecast[df_forecast["date"].dt.date > today]
     best_per_day = df_forecast.loc[df_forecast.groupby("date")["price"].idxmin()].sort_values("date")
 
-    # 🔍 Günstigster Tag (heute oder Prognose)
+    # Günstigster Tag (heute oder Prognose)
     best_entry = df_combined.loc[df_combined["price"].idxmin()]
     recommendation = {
         "date": best_entry["date"].strftime("%A, %d. %B %Y"),

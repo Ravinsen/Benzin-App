@@ -1,4 +1,3 @@
-# main.py
 import os
 import requests
 from pymongo import MongoClient
@@ -7,13 +6,13 @@ from geopy.geocoders import Nominatim
 from datetime import datetime, timezone
 import time
 
-# 🔄 .env laden
+# .env laden
 load_dotenv()
 
 api_key = os.getenv("TANKERKOENIG_API_KEY")
 MONGODB_URI = os.getenv("MONGODB_URI")
 
-# 🏙️ Liste von Städten
+# Liste von Städten
 staedte = [
     "Berlin", "Hamburg", "München", "Köln", "Frankfurt", "Stuttgart", "Düsseldorf",
     "Leipzig", "Dortmund", "Essen", "Bremen", "Dresden", "Hannover", "Nürnberg",
@@ -26,21 +25,21 @@ TYPE = "all"
 
 geolocator = Nominatim(user_agent="benzinprojekt")
 
-# 📅 Heutiges UTC-Datum (ohne Uhrzeit)
+# Heutiges UTC-Datum (ohne Uhrzeit)
 heute = datetime.now(timezone.utc).date()
 
 client = MongoClient(MONGODB_URI, tls=True, tlsAllowInvalidCertificates=True)
 db = client["benzinprojekt"]
 collection = db["tankstellen"]
 
-# 🧹 Nur Einträge mit heutigem Datum löschen
+# Nur Einträge mit heutigem Datum löschen
 result = collection.delete_many({
     "timestamp": {
         "$gte": datetime.combine(heute, datetime.min.time(), tzinfo=timezone.utc),
         "$lt": datetime.combine(heute, datetime.max.time(), tzinfo=timezone.utc)
     }
 })
-print(f"🧹 {result.deleted_count} Einträge von heute gelöscht.")
+print(f"{result.deleted_count} Einträge von heute gelöscht.")
 
 gesamtanzahl = 0
 
@@ -48,7 +47,7 @@ for ort in staedte:
     location = geolocator.geocode(ort)
 
     if not location:
-        print(f"❌ Ort '{ort}' nicht gefunden.")
+        print(f"Ort '{ort}' nicht gefunden.")
         continue
 
     lat, lng = location.latitude, location.longitude
@@ -63,7 +62,7 @@ for ort in staedte:
     data = response.json()
 
     if not data.get("ok"):
-        print(f"❌ Fehler bei der API für {ort}: {data}")
+        print(f"Fehler bei der API für {ort}: {data}")
         continue
 
     stations = data.get("stations", [])
@@ -81,4 +80,4 @@ for ort in staedte:
 
     time.sleep(1.5)
 
-print(f"🎉 Gesamt: {gesamtanzahl} neue Einträge hinzugefügt.")
+print(f"Gesamt: {gesamtanzahl} neue Einträge hinzugefügt.")

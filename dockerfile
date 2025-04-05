@@ -4,7 +4,6 @@ WORKDIR /app
 
 ENV PYTHONPATH="/app"
 
-# 🧩 Systemabhängigkeiten + deutsche Locale vorbereiten
 RUN apt-get update && apt-get install -y \
     build-essential \
     gcc \
@@ -20,16 +19,13 @@ RUN apt-get update && apt-get install -y \
     locale-gen de_DE.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
 
-# 🌍 Umgebungsvariablen setzen
 ENV LANG=de_DE.UTF-8
 ENV LANGUAGE=de_DE:de
 ENV LC_ALL=de_DE.UTF-8
 
-# 📦 Python-Abhängigkeiten
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 💾 App-Code kopieren
 COPY . .
 
 EXPOSE 8000
