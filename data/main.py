@@ -57,7 +57,7 @@ for ort in staedte:
         f"?lat={lat}&lng={lng}&rad={RADIUS}&sort={SORTIERUNG}&type={TYPE}&apikey={api_key}"
     )
 
-    print(f"📡 Anfrage für {ort} wird gesendet...")
+    print(f"Anfrage für {ort} wird gesendet...")
     response = requests.get(url)
     data = response.json()
 
@@ -66,7 +66,7 @@ for ort in staedte:
         continue
 
     stations = data.get("stations", [])
-    print(f"✅ {len(stations)} Tankstellen in {ort} gefunden.")
+    print(f"{len(stations)} Tankstellen in {ort} gefunden.")
 
     timestamp = datetime.now(timezone.utc)
 
