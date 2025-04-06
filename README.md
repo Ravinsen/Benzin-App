@@ -13,7 +13,7 @@ Steigende Kraftstoffpreise und regionale Unterschiede machen es zunehmend schwie
 
 ## Datenquelle
 
-Die Daten stammen von der Tankerkönig API, welche Preisinformationen lizenzierter deutscher Tankstellen zur Verfügung stellt. Täglich werden automatisiert rund 5'700 Tankstellen-Datensätze für die Kraftstoffarten E5 (Bleifrei 95), E10 (Bleifrei 98) und Diesel abgerufen und in einer Datenbank gespeichert.
+Die Daten stammen von der Tankerkönig API (https://tankerkoenig.de/), welche Preisinformationen lizenzierter deutscher Tankstellen zur Verfügung stellt. Täglich werden automatisiert rund 5'700 Tankstellen-Datensätze für die Kraftstoffarten E5 (Bleifrei 95), E10 (Bleifrei 98) und Diesel abgerufen und in einer Datenbank gespeichert.
 
 ## Features
 
