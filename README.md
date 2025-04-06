@@ -1,4 +1,4 @@
-# Benzinpreis-Prognose-App
+# Benzinpreis-Prognose-App - https://benzin-app-bvg0dcb9c2cmgwcq.canadacentral-01.azurewebsites.net/
 
 Diese Web-App hilft Nutzerinnen und Nutzern dabei, den besten Zeitpunkt zum Tanken zu ermitteln – basierend auf tagesaktuellen Daten deutscher Tankstellen sowie einer datenbasierten Prognose der nächsten fünf Tage. Die Anwendung kombiniert Preistransparenz mit intelligenter Vorhersage, um Autofahrern Einsparpotenziale aufzuzeigen.
 
